@@ -7,6 +7,7 @@ CREATE TABLE users (
     role ENUM('admin', 'manager') NOT NULL DEFAULT 'manager',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) Engine = InnoDB;
+
 CREATE TABLE buildings (
     id INT AUTO_INCREMENT PRIMARY KEY,
     manager_id INT NOT NULL,
@@ -16,6 +17,7 @@ CREATE TABLE buildings (
     CONSTRAINT fk_manager FOREIGN KEY (manager_id) REFERENCES users(id) 
     ON DELETE RESTRICT ON UPDATE CASCADE
 ) Engine = InnoDB;
+
 CREATE TABLE apartments (
     id INT AUTO_INCREMENT PRIMARY KEY,
     building_id INT NOT NULL,
@@ -25,6 +27,7 @@ CREATE TABLE apartments (
     CONSTRAINT fk_building FOREIGN KEY (building_id) REFERENCES buildings(id) 
     ON DELETE CASCADE ON UPDATE CASCADE
 ) Engine = InnoDB;
+
 CREATE TABLE residents (
     id INT AUTO_INCREMENT PRIMARY KEY,
     apartment_id INT NOT NULL,
@@ -35,6 +38,7 @@ CREATE TABLE residents (
     CONSTRAINT fk_apt_res FOREIGN KEY (apartment_id) REFERENCES apartments(id) 
     ON DELETE CASCADE ON UPDATE CASCADE
 ) Engine = InnoDB;
+
 CREATE TABLE repairs (
     id INT AUTO_INCREMENT PRIMARY KEY,
     building_id INT NOT NULL,
@@ -46,6 +50,7 @@ CREATE TABLE repairs (
     CONSTRAINT fk_build_rep FOREIGN KEY (building_id) REFERENCES buildings(id) 
     ON DELETE CASCADE ON UPDATE CASCADE
 ) Engine = InnoDB;
+
 CREATE TABLE fees (
     id INT AUTO_INCREMENT PRIMARY KEY,
     apartment_id INT NOT NULL,
